@@ -1,0 +1,95 @@
+<div class="row">
+    <div class="col-sm-5 col-md-5">
+        <form class="input-append" style="margin-top:0">
+            <h6 style="margin-top:0">Add Facets</h6>
+            <input bs-typeahead ng-options="field for field in fields.list" type="text" class="form-control" ng-model="newfacet">
+            <button class="btn btn-default" ng-click="add_facet_field(newfacet);newfacet=''"><i class="fa fa-plus"></i>
+            </button>
+        </form>
+    </div>
+    <div class="col-sm-7 col-md-7">
+        <h6 style="margin-top:0">Facets
+            <small>Click to remove</small>
+        </h6>
+        <span style="margin-left:3px" ng-click="remove_facet_field(field)" ng-repeat="field in $parent.panel.fields" class="label pointer remove label-default">{{field}}</span>
+    </div>
+</div>
+
+<h5>Options</h5>
+<div class="row">
+    <div class="col-sm-5 col-md-5">
+        <form class="input-append" style="margin-top:0">
+            <h6 style="margin-top:0">Highlighting</h6>
+            <input bs-typeahead ng-options="field for field in fields.list" type="text" class="form-control" ng-model="newhighlight">
+            <button class="btn btn-default" ng-click="toggle_highlight(newhighlight);set_refresh(true);newhighlight=''"><i class="fa fa-plus"></i>
+            </button>
+        </form>
+    </div>
+    <div class="col-sm-7 col-md-7">
+        <h6 style="margin-top:0">Highlighted
+            <small>Click to remove</small>
+        </h6>
+        <span style="margin-left:3px" ng-click="toggle_highlight(field);set_refresh(true);" ng-repeat="field in $parent.panel.highlight" class="label pointer remove label-default">{{field}}</span>
+    </div>
+</div>
+<div class="row">
+    <!--     <div class="span1">
+        <h6>Header</h6>
+        <input type="checkbox" ng-model="panel.header" ng-checked="panel.header">
+    </div> -->
+    <div class="col-sm-1 col-md-1">
+        <h6>Sorting</h6>
+        <input type="checkbox" ng-model="panel.sortable" ng-checked="panel.sortable">
+    </div>
+    <div class="col-sm-3 col-md-3" style="white-space:nowrap" ng-show="panel.sortable">
+        <h6>Sort  <i ng-click="set_sort(panel.sort[0])" ng-class="{'fa fa-chevron-up': panel.sort[1] == 'asc' || panel.sort.length < 2,'fa fa-chevron-down': panel.sort[1] == 'desc'}" style="cursor:pointer"></i></h6>
+        <input ng-show="all_fields.length<=0 || !all_fields" style="width:85%" ng-model="panel.sort[0]" ng-change="set_refresh(true)" bs-typeahead ng-options="field for field in fields.list" type="text" class="form-control">
+        <select ng-show="all_fields.length>0" style="width:85%" ng-model="panel.sort[0]" ng-change="set_refresh(true)" ng-options="f for f in all_fields"></select>
+        
+    </div>
+    <div class="col-sm-2 col-md-2">
+        <h6>Font Size</h6>
+        <select class="form-control" ng-model="panel.style['font-size']" ng-options="f for f in ['7pt','8pt','9pt','10pt','12pt','14pt','16pt','18pt','20pt','24pt','28pt','32pt','36pt','42pt','48pt','52pt','60pt','72pt']"></select>
+        
+    </div>
+    <div class="col-sm-2 col-md-2">
+        <h6>Trim Factor
+            <tip>Trim fields to this long divided by # of rows</tip>
+        </h6>
+        <input type="number" class="form-control" ng-model="panel.trimFactor">
+    </div>
+</div>
+<div class="row">
+    <div class="col-sm-2 col-md-2">
+        <h6>ID Field
+            <tip>The field that will be used as id field for documents</tip>
+        </h6>
+        <input bs-typeahead ng-options="field for field in fields.list" type="text" class="form-control" ng-model="panel.id_field">
+    </div>
+    <div class="col-sm-2 col-md-2">
+        <h6>Title Field
+            <tip>The field that will be shown as title field for document</tip>
+        </h6>
+        <input bs-typeahead ng-options="field for field in fields.list" type="text" class="form-control" ng-model="panel.header_field">
+    </div>
+    <div class="col-sm-2 col-md-2">
+        <h6>Body Field
+            <tip>The field that will be shown as body field for document</tip>
+        </h6>
+        <input bs-typeahead ng-options="field for field in fields.list" type="text" class="form-control" ng-model="panel.body_field">
+    </div>
+
+    <div class="col-sm-2 col-md-2">
+        <h6> URL field
+            <tip>URL field that will be linked to title field</tip>
+        </h6>
+        <input bs-typeahead ng-options="field for field in fields.list" type="text" class="form-control" ng-model="panel.url_field">
+    </div>
+
+    <div class="col-sm-2 col-md-2">
+        <h6>Facet Limit
+            <tip>Number of values per field that will be facted</tip>
+        </h6>
+        <input bs-typeahead ng-options="field for field in fields.list" type="number" class="form-control" ng-model="panel.facet_limit">
+    </div>
+</div>
